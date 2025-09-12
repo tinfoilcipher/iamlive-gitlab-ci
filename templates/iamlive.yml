@@ -1,0 +1,19 @@
+services:
+  - name: $SERVICE_IMAGE_URI
+    alias: iamlive
+
+variables:
+  IAMLIVE_PROXY_EXCEPTIONS: github.com,gitlab.com,registry.terraform.io,releases.hashicorp.com
+  IAMLIVE_CA_DIR: /builds/iamlive
+  IAMLIVE_OUTPUT_PATH: $CI_PROJECT_DIR/iamlive-policy.json
+
+.iamlive_pre:
+  script:
+    - export HTTPS_PROXY=http://iamlive:10080
+    - export HTTP_PROXY=http://iamlive:10080
+    - export NO_PROXY=$IAMLIVE_PROXY_EXCEPTIONS
+    - export AWS_CA_BUNDLE=$IAMLIVE_CA_DIR/ca.pem
+
+.iamlive_post:
+  script:
+    - curl -s --max-time 1 http://iamlive:10081/

@@ -1,0 +1,10 @@
+#--Environment
+ARG ALPINE_VERSION=3.22.1
+FROM alpine:${ALPINE_VERSION}
+
+#--Install packages
+RUN apk add --update --no-cache \
+    curl==8.14.1-r1 \
+    aws-cli==2.27.25-r0
+
+ENTRYPOINT [ "/bin/sh", "-c" ]

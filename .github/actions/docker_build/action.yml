@@ -1,0 +1,38 @@
+name: Docker build and push
+description: Build and push docker image to GHCR
+
+inputs:
+  image_tag:
+    required: true
+    description: "Image Tag"
+  service:
+    required: true
+    description: "Service Name"
+  dockerfile:
+    required: true
+    description: "Path to Dockerfile"
+  github_token:
+    required: true
+    description: "Github Auth Token"
+
+runs:
+  using: composite
+
+  steps:
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 #--v3.5.0
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ inputs.github_token }}
+
+    - name: Build Docker image
+      run: |
+        IMAGE_URI=ghcr.io/${{ github.repository_owner }}/${{ inputs.service }}:${{ inputs.image_tag }}
+        docker build -f ${{ inputs.dockerfile }} -t $IMAGE_URI .
+        echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Push Docker image
+      run: docker push ${{ env.IMAGE_URI }}
+      shell: bash

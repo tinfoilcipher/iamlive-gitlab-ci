@@ -1,0 +1,20 @@
+include:
+  - templates/docker_build.yml
+
+service_container:
+  extends: .docker_build
+  variables:
+    SERVICE: service
+    DOCKERFILE: Dockerfile
+    IMAGE_TAG: "latest"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+consumer_container:
+  extends: .docker_build
+  variables:
+    SERVICE: test-consumer
+    DOCKERFILE: Dockerfile.consumer
+    IMAGE_TAG: "latest"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
