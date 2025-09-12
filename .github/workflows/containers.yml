@@ -21,11 +21,12 @@ jobs:
           service: iamlive-gitlab-ci-service
           dockerfile: Dockerfile
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push consumer image
-        uses: ./.github/actions/docker_build
-        with:
-          image_tag: latest
-          service: iamlive-gitlab-ci-test-consumer
-          dockerfile: Dockerfile.consumer
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      
+      #--Uncomment below if you want to build a test consumer container
+      # - name: Build and push consumer image
+      #   uses: ./.github/actions/docker_build
+      #   with:
+      #     image_tag: latest
+      #     service: iamlive-gitlab-ci-test-consumer
+      #     dockerfile: Dockerfile.consumer
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
