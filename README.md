@@ -37,11 +37,6 @@ example-job:
     when: always
     paths:
       - $IAMLIVE_OUTPUT_PATH
-  services:
-    - name: docker:dind
-      alias: docker
-    - name: $SERVICE_IMAGE_URI
-      alias: iamlive
 ```
 
 ## Configuration Variables
@@ -55,4 +50,4 @@ example-job:
 
 ## How Does It Work?
 
-Diagram to follow, probably a full post.
+Diagram to follow...
