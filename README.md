@@ -41,13 +41,16 @@ example-job:
 
 ## Configuration Variables
 
-| Variable Name             | Function                                                                                                     | Default                                                            |
-|---------------------------|--------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| SERVICE_IMAGE_URI         | URI for Service Image                                                                                        |                                                                    |
-| IAMLIVE_OUTPUT_PATH       | Output path for iamlive report                                                                               | $CI_PROJECT_DIR/iamlive-policy.json                                |
-| IAMLIVE_PROXY_EXCEPTIONS  | List of HTTP/S proxy domain exceptions for iamlive (I.E. domains which will not be intercepted by the proxy) | github.com,gitlab.com,registry.terraform.io,releases.hashicorp.com |
-| IAMLIVE_CA_DIR            | Directory used for the iamlive internal CA. **Should not be changed without a good reason**                  | /builds/iamlive                                                    |
+| Variable Name                    | Function                                                                                                            | Default                                                            |
+|----------------------------------|---------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| SERVICE_IMAGE_URI                | URI for Service Image                                                                                               |                                                                    |
+| IAMLIVE_OUTPUT_PATH              | Output path for iamlive report                                                                                      | $CI_PROJECT_DIR/iamlive-policy.json                                |
+| IAMLIVE_PROXY_EXCEPTIONS         | List of HTTP/S proxy domain exceptions for iamlive (I.E. domains which will not be intercepted by the proxy)        | github.com,gitlab.com,registry.terraform.io,releases.hashicorp.com |
+| IAMLIVE_CA_DIR                   | Directory used for the iamlive internal CA. **Should not be changed without a good reason**                         | /builds/iamlive                                                    |
+| IAMLIVE_ADDITIONAL_ARGS          | Additional [cli arguments](https://github.com/iann0036/iamlive?tab=readme-ov-file#cli-arguments) to pass to iamlive |                                                                    |
+| IAMLIVE_FORCE_RESOURCE_WILDCARDS | Force wildcards to be returned for IAM resources instead of specific named resource objects                         | false                                                              |
+| IAMLIVE_FAILS_ONLY               | Return IAM policy matches for access failures only                                                                  | false                                                              |
 
 ## How Does It Work?
 
-Diagram to follow...
+![consumer-workflow](iamlive-gitlab-ci.svg)
