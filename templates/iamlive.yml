@@ -17,3 +17,4 @@ variables:
 .iamlive_post:
   script:
     - curl -s --max-time 1 http://iamlive:10081/
+

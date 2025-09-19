@@ -28,6 +28,7 @@ variables:
 example-job:
   stage: build
   image: ghcr.io/tinfoilcipher/iamlive-gitlab-ci-test-consumer:latest #--Provide your application which will be calling AWS, or use the example consumer for debugging
+  script:
     - !reference [.iamlive_pre, script]
     - aws s3 ls #--Put your functions here that call AWS
   after_script:
